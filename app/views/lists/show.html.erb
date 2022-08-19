@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h1>List of your collection</h1>
+      <ul>
+        <li>
+         <%= link_to (@list.name).upcase, lists_path  %>
+        </li>
+      </ul>
+
+      <h3>Movies in this list</h3>
+      <ul>
+          <% @list.bookmarks.each do |bookmark| %>
+          <li><%=bookmark.comment  %>
+            <%= link_to "Delete bookmark", bookmark_path(bookmark), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          <%= bookmark.movie.title %></li>
+        <% end %>
+      </ul>
+      <%= link_to "Add a bookmark",  new_list_bookmark_path(@list) %>
+
+      <%= @list.bookmarks.count %>
+    </div>
+  </div>
+</div>
