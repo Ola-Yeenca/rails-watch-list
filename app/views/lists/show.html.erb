@@ -7,13 +7,16 @@
          <%= link_to (@list.name).upcase, lists_path  %>
         </li>
       </ul>
-
+      <%= cl_image_tag @list.photo.key, width: 300, height: 150%>
       <h3>Movies in this list</h3>
       <ul>
           <% @list.bookmarks.each do |bookmark| %>
           <li><%=bookmark.comment  %>
             <%= link_to "Delete bookmark", bookmark_path(bookmark), data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-          <%= bookmark.movie.title %></li>
+          <%= bookmark.movie.title %>
+          <img src=<%= bookmark.movie.poster_url  %> alt="">
+          </li>
+
         <% end %>
       </ul>
       <%= link_to "Add a bookmark",  new_list_bookmark_path(@list) %>
